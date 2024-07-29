@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
+import LoginForm from './components/LoginForm.js';
+import CreateAccountForm from './components/CreateAccountForm.js';
+import TravelPlanner from './components/TravelPlanner.js';
 
 function App() {
 
@@ -11,10 +14,16 @@ function App() {
   }, []);*/}
 
   return (
-    <Container fluid className="App">
-        <header>
-          <h1 className="title">Travel Planner</h1>
-        </header>
+    <Container className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LoginForm />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/createaccount" element={<CreateAccountForm />} />
+            <Route path="/planner" element={<TravelPlanner />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+      </BrowserRouter>
     </Container>
   );
 }

@@ -1,11 +1,30 @@
 .App {
   text-align: center;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.planner{
+  width:50%;
 }
 
 .title {
   color: #000000;
   padding: 2vh;
+}
+
+.submit-button{
+  width: 20%;
+}
+
+.input-form{
+  max-width:50%;
+  margin: 0 auto;
+}
+
+.subheading{
+  justify-content: left;
 }
 
 body {
