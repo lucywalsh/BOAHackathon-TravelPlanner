@@ -30,7 +30,7 @@ export default function ModalButton({buttonText, modalTitle, modalBody, linkButt
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" style={{backgroundColor:'#9f04ed', borderColor:'#9f04ed'}} href={externalLink} target="_blank" rel="noopener noreferrer">{linkButtonText}</Button>
+          <Button variant="primary" style={{backgroundColor:'#9103D8', borderColor:'#9103D8'}} href={externalLink} target="_blank" rel="noopener noreferrer">{linkButtonText}</Button>
         </Modal.Footer>
       </Modal>
         </Row>

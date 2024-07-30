@@ -8,6 +8,10 @@ import { useUser } from '../contexts/User.js';
 
 export default function TravelPlanner() {
     const { user, logout } = useUser();
+    let showNWGOffers = false;
+    if(user!==null){
+        showNWGOffers = user.NWGCustomer;
+    }
 
     return (
         <Container className="planner">
@@ -17,7 +21,7 @@ export default function TravelPlanner() {
             <Row className="mb-3">
                 <h5 class="text-start">Book your trip</h5>
             </Row>
-            {user.NWGCustomer && <ModalButton
+            {showNWGOffers && <ModalButton
                 buttonText="Set up one-click payments"
                 modalTitle="Quick, easy and secure payments for all your travel needs"
                 modalBody={<div>
@@ -35,33 +39,37 @@ export default function TravelPlanner() {
                     <IconButton
                         id="book-flights"
                         title="Flights"
+                        alt_text="Book flights"
                         address="/icons/plane.png"
-                        colour="#007BFF"
+                        colour="#0071EB"
                     ></IconButton>
                     <IconButton
                         id="book-hotels"
                         title="Hotels"
+                        alt_text="Book hotels"
                         address="/icons/hotel.png"
-                        colour="#FBB200"
-                    ></IconButton>
-                    <IconButton
-                        id="book-trips"
-                        title="Trips"
-                        address="/icons/glass.png"
-                        colour="#F50056"
+                        colour="#5928ed"
                     ></IconButton>
                     <IconButton
                         id="book-car"
                         title="Car Hire"
+                        alt_text="Book car hire"
                         address="/icons/electric-car.png"
-                        colour="#10bcbc"
+                        colour="#7b4ae9"
+                    ></IconButton>
+                    <IconButton
+                        id="book-trips"
+                        title="Trips"
+                        alt_text="Book trips"
+                        address="/icons/glass.png"
+                        colour="#b51963"
                     ></IconButton>
                 </Col>
             </Row>
             <Row className="mb-3">
                 <h5 class="text-start">Plan your trip</h5>
             </Row>
-            {user.NWGCustomer && <ModalButton
+            {showNWGOffers && <ModalButton
                 buttonText="Apply for a Travel Rewards Credit Card"
                 modalTitle="Get Rewards when you spend on holidays abroad and at home"
                 modalBody={<div>
@@ -82,18 +90,20 @@ export default function TravelPlanner() {
                     <IconButton
                         id="plan-insurnace"
                         title="Insurance"
+                        alt_text="Purchase insurance"
                         address="/icons/insurance.png"
-                        colour="#FF6800"
+                        colour="#7327b6"
                     ></IconButton>
                     <IconButton
                         id="plan-offset"
                         title="Offsets"
+                        alt_text="Purchase carbon offsets"
                         address="/icons/leaf.png"
-                        colour="#2fb746"
+                        colour="#257846"
                     ></IconButton>
                 </Col>
             </Row>
-            {!user.NWGCustomer && 
+            {!showNWGOffers && 
             <Row className='mb-4'>
                 <p className="subheading">Are you a NatWest, RBS or Ulster Bank Customer?</p>
                 <p>Login via your bank for exclusive offers and ways to pay</p>

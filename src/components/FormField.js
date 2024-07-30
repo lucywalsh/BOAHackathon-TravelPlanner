@@ -8,6 +8,7 @@ export default function FormField({ id, fieldRef, placeholder, type, description
                 required
                 type={type || 'text'}
                 placeholder={placeholder}
+                aria-label={placeholder}
                 ref={fieldRef}
             />
             <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
