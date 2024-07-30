@@ -1,3 +1,4 @@
+import {useState, useEffect} from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import LoginForm from './components/LoginForm.js';
@@ -6,14 +7,17 @@ import TravelPlanner from './components/TravelPlanner.js';
 
 function App() {
 
-  {/*const [message, setMessage] = useState("");
-  *useEffect(() => {
+  const [message, setMessage] = useState("");
+  useEffect(() => {
     fetch("/hello").then(res => res.json()).then(data => {
       setMessage(data.message);
     });
-  }, []);*/}
+  }, []);
+
+  console.log(message);
 
   return (
+    
     <Container className="App">
         <BrowserRouter>
           <Routes>
