@@ -1,11 +1,16 @@
 import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import FormField from './FormField.js';
+import { useUser } from '../contexts/User.js'; 
 
 export default function LoginForm() {
+
+  const{login} = useUser();
+  const navigate = useNavigate();
     
     const [validated, setValidated] = useState(false);
     const emailField = useRef();
@@ -26,6 +31,10 @@ export default function LoginForm() {
         const password = passwordField.current.value;
 
         // log user in
+        if (form.checkValidity() === true) { 
+          login(email, password)
+          navigate('/planner')
+        }
     };
 
   return (

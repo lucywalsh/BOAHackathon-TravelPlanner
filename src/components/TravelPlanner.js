@@ -1,26 +1,23 @@
-import {useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import IconButton from './IconButton.js';
 import ModalButton from './ModalButton.js';
 import Button from 'react-bootstrap/Button';
+import { useUser } from '../contexts/User.js'; 
 
 export default function TravelPlanner() {
-    //TODO: pass NWCustomer in as a prop
-    const [NWGCustomer, setNWGCustomer] = useState(true);
+    const { user, logout } = useUser();
 
     return (
         <Container className="planner">
             <Row>
-                <header>
-                    <h1 className="title">Travel Planner</h1>
-                </header>
+                <h1 className="title">Travel Planner</h1>
             </Row>
             <Row className="mb-3">
                 <h5 class="text-start">Book your trip</h5>
             </Row>
-            {NWGCustomer && <ModalButton
+            {user.NWGCustomer && <ModalButton
                 buttonText="Set up one-click payments"
                 modalTitle="Quick, easy and secure payments for all your travel needs"
                 modalBody={<div>
@@ -64,7 +61,7 @@ export default function TravelPlanner() {
             <Row className="mb-3">
                 <h5 class="text-start">Plan your trip</h5>
             </Row>
-            {NWGCustomer && <ModalButton
+            {user.NWGCustomer && <ModalButton
                 buttonText="Apply for a Travel Rewards Credit Card"
                 modalTitle="Get Rewards when you spend on holidays abroad and at home"
                 modalBody={<div>
@@ -96,12 +93,15 @@ export default function TravelPlanner() {
                     ></IconButton>
                 </Col>
             </Row>
-            {!NWGCustomer && 
-            <Row>
+            {!user.NWGCustomer && 
+            <Row className='mb-4'>
                 <p className="subheading">Are you a NatWest, RBS or Ulster Bank Customer?</p>
                 <p>Login via your bank for exclusive offers and ways to pay</p>
                 <Button variant="primary" style={{backgroundColor:'#9f04ed', borderColor:'#9f04ed', width:'40vh', margin:'0 auto'}}>Login securely via your bank</Button>
             </Row>}
+            <Row>
+            <Button variant="secondary" style={{width:'40vh', margin:'0 auto'}} onClick={logout} href='login'>Logout</Button>
+            </Row>
         </Container>
     );
 }

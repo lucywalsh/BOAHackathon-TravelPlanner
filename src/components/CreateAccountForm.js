@@ -1,21 +1,40 @@
 import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import FormField from './FormField.js';
+import { useUser } from '../contexts/User.js'; 
 
-export default function LoginForm() {
-    
+
+export default function CreateAccountForm() {
+    const{login} = useUser();
+    const navigate = useNavigate();
+
     const [validated, setValidated] = useState(false);
+
     const emailField = useRef();
     const firstNameField = useRef();
     const surnameField = useRef();
     const DOBField = useRef();
     const passwordField = useRef();
+
+    const headers = new Headers()
+    headers.append("Content-Type", "application/json");
+
+    const checkCustomerStatusAndLogin = (firstName, surname, dateOfBirth, email, password) => {
+        fetch("/customer-discovery", {
+            method: "POST",
+            body: JSON.stringify({ given_name: firstName, family_name: surname, birthdate: dateOfBirth}),
+            headers: headers,
+        }).then(res => res.json()).then(data => {
+            login(email, password, data.match);
+            navigate('/planner');
+        });
+    }
     
     const onSubmit = (event) => {
-        console.log("login");
 
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -31,8 +50,12 @@ export default function LoginForm() {
         const dateOfBirth = DOBField.current.value;
         const password = passwordField.current.value;
 
-        // log user in
-    };
+        if (form.checkValidity() === true){
+            event.preventDefault();
+            event.stopPropagation();
+            checkCustomerStatusAndLogin(firstName, surname, dateOfBirth, email, password)
+        }
+    }
 
   return (
     <Col className="input-form">

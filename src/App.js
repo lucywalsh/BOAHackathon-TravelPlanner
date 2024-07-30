@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import User from './contexts/User.js'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import LoginForm from './components/LoginForm.js';
@@ -7,26 +7,19 @@ import TravelPlanner from './components/TravelPlanner.js';
 
 function App() {
 
-  const [message, setMessage] = useState("");
-  useEffect(() => {
-    fetch("/hello").then(res => res.json()).then(data => {
-      setMessage(data.message);
-    });
-  }, []);
-
-  console.log(message);
-
   return (
     
     <Container className="App">
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LoginForm />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/createaccount" element={<CreateAccountForm />} />
-            <Route path="/planner" element={<TravelPlanner />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
+          <User>
+            <Routes>
+              <Route path="/" element={<LoginForm />} />
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/createaccount" element={<CreateAccountForm />} />
+              <Route path="/planner" element={<TravelPlanner />} />
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+          </User>
       </BrowserRouter>
     </Container>
   );
