@@ -78,6 +78,7 @@ export default function TravelPlanner() {
                     </ul>
                 </div>}
                 linkButtonText="Apply now"
+                externalLink="https://www.natwest.com/credit-cards/travel-reward-credit-card.html"
             ></ModalButton>}
             <Row className="mb-5">
                 <Col>

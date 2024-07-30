@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-export default function ModalButton({buttonText, modalTitle, modalBody, linkButtonText}){
+export default function ModalButton({buttonText, modalTitle, modalBody, linkButtonText, externalLink}){
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -30,7 +30,7 @@ export default function ModalButton({buttonText, modalTitle, modalBody, linkButt
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" style={{backgroundColor:'#9f04ed', borderColor:'#9f04ed'}}>{linkButtonText}</Button>
+          <Button variant="primary" style={{backgroundColor:'#9f04ed', borderColor:'#9f04ed'}} href={externalLink} target="_blank" rel="noopener noreferrer">{linkButtonText}</Button>
         </Modal.Footer>
       </Modal>
         </Row>
